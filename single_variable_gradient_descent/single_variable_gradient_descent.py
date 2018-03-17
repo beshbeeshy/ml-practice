@@ -25,4 +25,4 @@ def gradient_descent(data, iterations, alpha):
 
 data = load_data()
 optimum = gradient_descent(data, 2000, 0.05)
-print hypothesis(optimum[0], optimum[1], 4)
+print 'Theta Values: {0}, {1}'.format(optimum[0], optimum[1])

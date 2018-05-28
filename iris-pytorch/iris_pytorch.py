@@ -73,8 +73,7 @@ optimizer = torch.optim.SGD(net.parameters(), lr=0.01)
 for epoch in range(num_epoch):
     train(epoch)
 
-xtrained_backup = xtrained
-xtrained_backup = xtrained_backup.detach().numpy()
+xtrained_backup = xtrained.detach().numpy()
 
 X = Variable(torch.Tensor(xtest).float())
 Y = torch.Tensor(ytest).long()

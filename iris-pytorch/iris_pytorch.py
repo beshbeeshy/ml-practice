@@ -77,7 +77,7 @@ X = Variable(torch.Tensor(xtest).float())
 Y = torch.Tensor(ytest).long()
 out = net(X)
 _, predicted = torch.max(out.data, 1)
-print(out)
+
 print('Accuracy of the network %d %%' % (100 * torch.sum(Y==predicted) / 30))
 
 fig = plt.figure()

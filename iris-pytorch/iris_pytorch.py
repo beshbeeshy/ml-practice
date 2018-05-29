@@ -53,9 +53,9 @@ datatest_array = datatest.as_matrix()
 xtest = datatest_array[:,:3]
 ytest = datatest_array[:,3]
 
-xtrained = None
-
 torch.manual_seed(1234)
+
+xtrained = None
 
 hl = 3
 num_epoch = 5000
@@ -68,20 +68,25 @@ optimizer = torch.optim.SGD(net.parameters(), lr=0.01)
 for epoch in range(num_epoch):
     train(epoch)
 
-xtrained_backup = xtrained.detach().numpy()
+xtrained_backup = xtrained
 
 X = Variable(torch.Tensor(xtest).float())
 Y = torch.Tensor(ytest).long()
 out = net(X)
 _, predicted = torch.max(out.data, 1)
 
+xtrained_backup = xtrained_backup.detach().numpy()
+xtrained = xtrained.detach().numpy()
+
 print('Accuracy of the network %d %%' % (100 * torch.sum(Y==predicted) / 30))
 
 fig = plt.figure()
-ax1 = fig.add_subplot(211, projection='3d')
-ax2 = fig.add_subplot(212, projection='3d')
+ax1 = fig.add_subplot(131, projection='3d')
+ax2 = fig.add_subplot(132, projection='3d')
+ax3 = fig.add_subplot(133, projection='3d')
 
 ax1.scatter(datatrain['sepal_length'], datatrain['sepal_width'], datatrain['petal_width'], c=ytrain)
 ax2.scatter(xtrained_backup[:,0], xtrained_backup[:,1], xtrained_backup[:,2], c=ytrain)
+ax3.scatter(xtrained[:,0], xtrained[:,1], xtrained[:,2], c=ytest)
 
 plt.show()

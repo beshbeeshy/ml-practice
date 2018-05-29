@@ -8,18 +8,15 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 class Net(nn.Module):
-
     def __init__(self):
         super(Net, self).__init__()
         self.fc1 = nn.Linear(3, hl)
-        self.fc2 = nn.Linear(hl, hl)
-        self.fc3 = nn.Linear(hl, 3)
+        self.fc2 = nn.Linear(hl, 3)
 
     def forward(self, x):
         global xtrained
         x = F.tanh(self.fc1(x))
-        x = F.tanh(self.fc2(x))
-        x = self.fc3(x)
+        x = self.fc2(x)
         xtrained = x
         return x
 
@@ -61,7 +58,7 @@ xtrained = None
 torch.manual_seed(1234)
 
 hl = 3
-num_epoch = 10000
+num_epoch = 5000
 
 net = Net()
 
